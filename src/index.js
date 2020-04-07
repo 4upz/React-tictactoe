@@ -15,7 +15,7 @@ import './index.css';
   class Board extends React.Component {
     renderSquare(index) {
       return (
-        <Square 
+        <Square key={index} 
           value={this.props.squares[index]}
           //Passes the onClick function through the square's prop parameter
           onClick={() => this.props.onClick(index)}
@@ -57,6 +57,7 @@ import './index.css';
         }],
         stepNumber: 0,
         xIsNext: true,
+        hasDescendingHistory: false,
       };
     }
 
@@ -65,7 +66,7 @@ import './index.css';
       const current = history[history.length - 1];
       const squares = current.squares.slice();
       // Do nothing if someone has won the game or if the square is already filled
-      if (calculateWinner(squares) || squares[index]){
+      if (calculatedWinner(squares) || squares[index]){
         return;
       }
       squares[index] = this.state.xIsNext ? 'X' : 'O';
@@ -88,10 +89,17 @@ import './index.css';
       });
     }
 
+    /* Solution 4: Helper function for ascending/descending list items after sort button is clicked */
+    sortHistory(){
+      this.setState({
+        hasDescendingHistory: !this.state.hasDescendingHistory,
+      });
+    }
+
     render() {
       const history = this.state.history;
       const current = history[this.state.stepNumber];
-      const winner = calculateWinner(current.squares);
+      const winner = calculatedWinner(current.squares);
 
       const moves = history.map((step, move) => {
         /* Solution 1: Displaying the move location in the history list */
@@ -104,9 +112,12 @@ import './index.css';
         </li>);
       });
 
+      /* Solution 4: Display the list of move history based on selected sort method */
+      if (this.state.hasDescendingHistory) moves.reverse();
+
       let status;
       if (winner) {
-        status = `Winner: ${winner}`;
+        status = `${winner} is the winner!`;
       } else {
         status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`
       }
@@ -121,7 +132,11 @@ import './index.css';
           </div>
           <div className="game-info">
             <div>{status}</div>
+            {/* Solution 4: Added sort button with listener.*/}
             <ol>{moves}</ol>
+            <button onClick={() => this.sortHistory()}>
+              {this.state.hasDescendingHistory ? 'Ascending' : 'Descending'} History
+            </button>
           </div>
         </div>
       );
@@ -136,7 +151,7 @@ import './index.css';
   );
 
   // Analyzes when the game is won and reveals the tic-tac-toe winner
-  function calculateWinner(squares){
+  function calculatedWinner(squares){
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
