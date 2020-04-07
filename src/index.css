@@ -40,6 +40,10 @@ body {
   .square:focus {
     outline: none;
   }
+
+  .winning-square {
+    background-color: gold;
+  }
   
   .kbd-navigation .square:focus {
     background: #ddd;

@@ -4,8 +4,10 @@ import './index.css';
 
   // This is considered a function component, for a component that only contains a render method and doesn't need to be a class
   function Square(props){
+    /* Solution 5: Append class name if this square is a winning square and should be highlighted */
+    const className = `square ${props.isWinningSquare ? 'winning-square' : ''}`
     return (
-      <button className="square" onClick={props.onClick}>
+      <button className={className} onClick={props.onClick}>
         {props.value}
       </button>
     )
@@ -14,11 +16,15 @@ import './index.css';
   // Controls board rendering
   class Board extends React.Component {
     renderSquare(index) {
+      const winningRow = this.props.winningRow;
       return (
-        <Square key={index} 
+        <Square 
+          key={index} 
           value={this.props.squares[index]}
           //Passes the onClick function through the square's prop parameter
           onClick={() => this.props.onClick(index)}
+          /* Solution 5: Whether this square is a winning square */
+          isWinningSquare={winningRow && winningRow.includes(index)}
           />
         );
     }
@@ -66,7 +72,7 @@ import './index.css';
       const current = history[history.length - 1];
       const squares = current.squares.slice();
       // Do nothing if someone has won the game or if the square is already filled
-      if (calculatedWinner(squares) || squares[index]){
+      if (calculatedWinner(squares).winner || squares[index]){
         return;
       }
       squares[index] = this.state.xIsNext ? 'X' : 'O';
@@ -99,7 +105,10 @@ import './index.css';
     render() {
       const history = this.state.history;
       const current = history[this.state.stepNumber];
-      const winner = calculatedWinner(current.squares);
+      /* Solution 5: New variables to account for game progress and results if there is a winner */
+      const gameProgress = calculatedWinner(current.squares);
+      const winner = gameProgress.winner;
+      const winningRow = gameProgress.winningRow;
 
       const moves = history.map((step, move) => {
         /* Solution 1: Displaying the move location in the history list */
@@ -118,7 +127,12 @@ import './index.css';
       let status;
       if (winner) {
         status = `${winner} is the winner!`;
-      } else {
+      } 
+      /* Solution 6: Extra condition for declaring a tie when the maximum moves are made with no winner */
+      else if (this.state.stepNumber >= current.squares.length) {
+        status = 'The game is a tie!';
+      } 
+      else {
         status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`
       }
 
@@ -128,6 +142,7 @@ import './index.css';
             <Board 
               squares={current.squares}
               onClick={(index) => this.handleClick(index)}
+              winningRow={winningRow}
             />
           </div>
           <div className="game-info">
@@ -165,8 +180,15 @@ import './index.css';
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
+        /* Solution 5: New return values that now includes the winning row of squares */
+        return {
+          winner: squares[a],
+          winningRow: lines[i]
+        };
       }
     }
-    return null;
+    return {
+      winner: null,
+      winningRow: null
+    };
   }
