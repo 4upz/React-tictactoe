@@ -16,8 +16,9 @@ body {
   .status {
     margin-bottom: 10px;
   }
-
-  .bold-selection {
+  
+  /* Styling used for Solution 2  */
+  .current-step {
     font-weight: bold;
   }
   

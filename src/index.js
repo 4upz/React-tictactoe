@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-  // This is considered a functiopn component, for a component that only contains a render method and doesn't need to be a class
+  // This is considered a function component, for a component that only contains a render method and doesn't need to be a class
   function Square(props){
     return (
       <button className="square" onClick={props.onClick}>
@@ -22,26 +22,25 @@ import './index.css';
           />
         );
     }
-  
+
+    /* Solution 3: Uses two loops to Render rows of squares for the tic-tac-toe board */
+    renderBoard(boardSize){
+      let board = [];
+      for (let i = 0; i < boardSize; i++) {
+        let squareRow = []
+        for (let j = 0; j < boardSize; j++) {
+          squareRow.push(this.renderSquare(3 * i + j));
+        }
+        board.push(<div key={i} className="board-row">{squareRow}</div>)
+      }
+      return board;
+    }
+
     render() {
+      /* Solution 3: Using two loops (in helper method) to make the board squares */
+      const boardSize = 3;
       return (
-        <div>
-          <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
-        </div>
+        <div>{this.renderBoard(boardSize)}</div>
       );
     }
   }
@@ -73,6 +72,7 @@ import './index.css';
       this.setState({
         history: history.concat([{
         squares: squares,
+        /* Solution 1: How to calculate columns and rows for recording move locations */
         moveCol: index % 3 + 1,
         moveRow: Math.floor(index / 3) + 1,
       }]),
@@ -94,12 +94,13 @@ import './index.css';
       const winner = calculateWinner(current.squares);
 
       const moves = history.map((step, move) => {
+        /* Solution 1: Displaying the move location in the history list */
         const desc = move ?
         `Go to Move # ${move} - (Col ${step.moveCol}, Row ${step.moveRow})` :
         `Go to Game Start`;
-        // Conditional class assignment for bolding currently selected step
+        /* Solution 2: Conditional class assignment for bolding currently selected step */
         return (<li key={move}> 
-          <button className={move===this.state.stepNumber ? 'bold-selection' : null} onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button className={move===this.state.stepNumber ? 'current-step' : null} onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>);
       });
 
