@@ -37,6 +37,6 @@ export default class Board extends Component {
   render() {
     /* Solution 3: Using two loops (in helper method) to make the board squares */
     const boardSize = 3;
-    return <div>{this.renderBoard(boardSize)}</div>;
+    return <div className="board">{this.renderBoard(boardSize)}</div>;
   }
 }

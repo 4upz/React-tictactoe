@@ -7,6 +7,12 @@ body {
   ol, ul {
     padding-left: 30px;
   }
+
+  /* h1{
+    position: absolute; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } */
   
   .board-row:after {
     clear: both;
