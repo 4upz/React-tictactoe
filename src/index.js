@@ -1,63 +1,18 @@
-import React from 'react';
+/* React */
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+/* Components & Styling */
+import './index.css';
+import Board from './components/board';
+/* Material UI */
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button'; //Uses Material Core as Button reference
 import IconButton from '@material-ui/core/IconButton';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import './index.css';
-
-  // This is considered a function component, for a component that only contains a render method and doesn't need to be a class
-  function Square(props){
-    /* Solution 5: Append class name if this square is a winning square and should be highlighted */
-    const className = `square ${props.isWinningSquare ? 'winning-square' : ''}`
-    return (
-      <button className={className} onClick={props.onClick}>
-        {props.value}
-      </button>
-    )
-  }
-  
-  // Controls board rendering
-  class Board extends React.Component {
-    renderSquare(index) {
-      const winningRow = this.props.winningRow;
-      return (
-        <Square 
-          key={index} 
-          value={this.props.squares[index]}
-          //Passes the onClick function through the square's prop parameter
-          onClick={() => this.props.onClick(index)}
-          /* Solution 5: Whether this square is a winning square */
-          isWinningSquare={winningRow && winningRow.includes(index)}
-          />
-        );
-    }
-
-    /* Solution 3: Uses two loops to Render rows of squares for the tic-tac-toe board */
-    renderBoard(boardSize){
-      let board = [];
-      for (let i = 0; i < boardSize; i++) {
-        let squareRow = []
-        for (let j = 0; j < boardSize; j++) {
-          squareRow.push(this.renderSquare(3 * i + j));
-        }
-        board.push(<div key={i} className="board-row">{squareRow}</div>)
-      }
-      return board;
-    }
-
-    render() {
-      /* Solution 3: Using two loops (in helper method) to make the board squares */
-      const boardSize = 3;
-      return (
-        <div>{this.renderBoard(boardSize)}</div>
-      );
-    }
-  }
   
   // Controls the game functionality and overview
-  class Game extends React.Component {
+  class Game extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -142,7 +97,10 @@ import './index.css';
       }
 
       return (
-        <Container maxwidth="lg" className="game">
+        <Container maxwidth="sm" className="game">
+        <div className="game-title">
+          <h1>Tic-Tac-Toe</h1>
+        </div>
           <div className="game-board">
             <Board 
               squares={current.squares}
