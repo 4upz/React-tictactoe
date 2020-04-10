@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button'; //Uses Material Core as Button reference
+import IconButton from '@material-ui/core/IconButton';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import './index.css';
 
   // This is considered a function component, for a component that only contains a render method and doesn't need to be a class
@@ -117,7 +122,7 @@ import './index.css';
         `Go to Game Start`;
         /* Solution 2: Conditional class assignment for bolding currently selected step */
         return (<li key={move}> 
-          <button className={move===this.state.stepNumber ? 'current-step' : null} onClick={() => this.jumpTo(move)}>{desc}</button>
+          <Button variant="contained" size="small" color={move===this.state.stepNumber ? "primary" : "default"} onClick={() => this.jumpTo(move)}>{desc}</Button>
         </li>);
       });
 
@@ -137,7 +142,7 @@ import './index.css';
       }
 
       return (
-        <div className="game">
+        <Container maxwidth="lg" className="game">
           <div className="game-board">
             <Board 
               squares={current.squares}
@@ -149,11 +154,11 @@ import './index.css';
             <div>{status}</div>
             {/* Solution 4: Added sort button with listener.*/}
             <ol>{moves}</ol>
-            <button onClick={() => this.sortHistory()}>
-              {this.state.hasDescendingHistory ? 'Ascending' : 'Descending'} History
-            </button>
+            <IconButton arialabel="sort" size="small" onClick={() => this.sortHistory()}>
+              {this.state.hasDescendingHistory ?  <ArrowUpwardIcon fontSize="inherit" /> : <ArrowDownwardIcon fontSize="inherit" />}
+            </IconButton>
           </div>
-        </div>
+        </Container>
       );
     }
   }
