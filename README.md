@@ -1,3 +1,7 @@
+## Published App
+4upz.github.io/React-tictactoe
+
+--------------------------------------------------------------------------------------------------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
