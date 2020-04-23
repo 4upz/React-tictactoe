@@ -8,12 +8,19 @@ body {
     padding-left: 30px;
   }
 
-  /* h1{
-    position: absolute; 
-    left: 50%;
-    transform: translate(-50%, -50%);
-  } */
+  h1{
+    text-align: center;
+  }
   
+  .board {
+    width: 102px;
+    margin: auto;
+  }
+
+  .board-row {
+    width: 102px;
+  }
+
   .board-row:after {
     clear: both;
     content: "";
@@ -59,10 +66,20 @@ body {
   .game {
     background: white;
     /* max-width: 960px; */
-    margin: auto;
+    width: 90vw;
     height: 90vh;
   }
   
   .game-info {
-    margin-left: 20px;
+    padding-top: 20px;
+    margin: auto;
+    text-align: center;
+  }
+
+  .game-board {
+    margin: auto;
+  }
+
+  .move-list {
+    list-style: none;
   }
