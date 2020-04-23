@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/4upz.github.io/React-tictactoe/static/css/main.32115214.chunk.css",
+    "main.js": "/4upz.github.io/React-tictactoe/static/js/main.59b702fb.chunk.js",
+    "main.js.map": "/4upz.github.io/React-tictactoe/static/js/main.59b702fb.chunk.js.map",
+    "runtime-main.js": "/4upz.github.io/React-tictactoe/static/js/runtime-main.c898d3df.js",
+    "runtime-main.js.map": "/4upz.github.io/React-tictactoe/static/js/runtime-main.c898d3df.js.map",
+    "static/js/2.5d423248.chunk.js": "/4upz.github.io/React-tictactoe/static/js/2.5d423248.chunk.js",
+    "static/js/2.5d423248.chunk.js.map": "/4upz.github.io/React-tictactoe/static/js/2.5d423248.chunk.js.map",
+    "index.html": "/4upz.github.io/React-tictactoe/index.html",
+    "precache-manifest.1679aa7e1d863368979c8e6551133ac0.js": "/4upz.github.io/React-tictactoe/precache-manifest.1679aa7e1d863368979c8e6551133ac0.js",
+    "service-worker.js": "/4upz.github.io/React-tictactoe/service-worker.js",
+    "static/css/main.32115214.chunk.css.map": "/4upz.github.io/React-tictactoe/static/css/main.32115214.chunk.css.map",
+    "static/js/2.5d423248.chunk.js.LICENSE.txt": "/4upz.github.io/React-tictactoe/static/js/2.5d423248.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c898d3df.js",
+    "static/js/2.5d423248.chunk.js",
+    "static/css/main.32115214.chunk.css",
+    "static/js/main.59b702fb.chunk.js"
+  ]
+}
